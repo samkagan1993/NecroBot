@@ -66,9 +66,12 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11} EP erhalten | {12} | B: {13} L: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | B: {11} L: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -79,7 +82,7 @@
       "Value": "{0} benutzt, {1} verbleibend"
     },
     {
-      "Key": "itemRazzBerry",
+      "Key": "ItemRazzBerry",
       "Value": "Himmihbeere"
     },
     {
@@ -268,7 +271,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktuelles Inventar] Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+      "Value": "Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+    },
+    {
+      "Key": "CurrentPotionInv",
+      "Value": "Tränke: {0} | Supertränke: {1} | Hypertränke: {2} | Top-Tränke: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Beleber: {0} | Top-Beleber: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Beeren: {0} | Rauch: {1} | Glücks-Eier: {2} | Lockmodule: {3}"
     },
     {
       "Key": "invFullTransferring",
@@ -333,7 +348,7 @@
     },
     {
       "Key": "CatchTypeNormal",
-      "Value": "Wild"
+      "Value": "Wildes"
     },
     {
       "Key": "CatchTypeLure",
@@ -350,6 +365,18 @@
     {
       "Key": "StatsTemplateString",
       "Value": "{0} - Laufzeit {1} - Lvl: {2} | EP/H: {3:n0} | P/H: {4:n0} | Sternenstaub: {5:n0} | Verschickt: {6:n0} | Weggeworfen: {7:n0}"
+    },
+    {
+      "Key": "ProfileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschlüpft: {7} \n Pokemons entwickelt: {8} \n Pokedex Einträge: {9} \n KM gelaufen: {10} \n Pokemons: {11}/{12}"
+    },
+    {
+      "Key": "ShowPokeTemplate",
+      "Value": " \n WP {0} | IV : {1}% | Name: {2}"
+    },
+    {
+      "Key": "HelpTemplate",
+      "Value": "Kommandos: \n \n /top <cp/iv> <amount> - Zeigt die besten Pokemons an. \n /all <cp/iv> - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items \n /status - Zeigt den Status vom Bot. \n /pokedex - Zeigt dein Pokedex. "
     },
     {
       "Key": "StatsXpTemplateString",
@@ -370,6 +397,10 @@
     {
       "Key": "GoogleError",
       "Value": "Stell sicher, dass du die richtige E-Mail & Passwort eingegeben hast."
+    },
+    {
+      "Key": "GoogleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
     },
     {
       "Key": "MissingCredentialsGoogle",
@@ -397,11 +428,11 @@
     },
     {
       "Key": "DisplayHighestMove1Header",
-      "Value": "BEWEGUNG1"
+      "Value": "ATTACKE1"
     },
     {
       "Key": "DisplayHighestMove2Header",
-      "Value": "BEWEGUNG2"
+      "Value": "ATTACKE2"
     },
     {
       "Key": "DisplayHighestCandy",
@@ -454,6 +485,26 @@
     {
       "Key": "PkmNotEnoughRessources",
       "Value": "Pokémon Upgrade fehlgeschlagen, nicht genügend Ressourcen"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Warte mit Entwicklungen von {0} Pokémon bis {1} weitere gefangen wurden! ({2}/{3} bis {4}% Inventar Auslastung)"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex gefangen --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Gefangen: {2} | Gesehen: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex gebraucht --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [
@@ -1060,6 +1111,728 @@
     {
       "Key": "mew",
       "Value": "Mew"
+    }
+  ],
+  "PokemonMovesetStrings": [
+    {
+      "Key": "moveUnset",
+      "Value": "Keine Attacke"
+    },
+    {
+      "Key": "thunderShock",
+      "Value": "Donnerschock"
+    },
+    {
+      "Key": "quickAttack",
+      "Value": "Ruckzuckhieb"
+    },
+    {
+      "Key": "scratch",
+      "Value": "Kratzer"
+    },
+    {
+      "Key": "ember",
+      "Value": "Glut"
+    },
+    {
+      "Key": "vineWhip",
+      "Value": "Rankenhieb"
+    },
+    {
+      "Key": "tackle",
+      "Value": "Tackle"
+    },
+    {
+      "Key": "razorLeaf",
+      "Value": "Rasierblatt"
+    },
+    {
+      "Key": "takeDown",
+      "Value": "Bodycheck"
+    },
+    {
+      "Key": "waterGun",
+      "Value": "Aquaknarre"
+    },
+    {
+      "Key": "bite",
+      "Value": "Biss"
+    },
+    {
+      "Key": "pound",
+      "Value": "Pfund"
+    },
+    {
+      "Key": "doubleSlap",
+      "Value": "Duplexhieb"
+    },
+    {
+      "Key": "wrap",
+      "Value": "Wickel"
+    },
+    {
+      "Key": "hyperBeam",
+      "Value": "Hyperstrahl"
+    },
+    {
+      "Key": "lick",
+      "Value": "Schlecker"
+    },
+    {
+      "Key": "darkPulse",
+      "Value": "Finsteraura"
+    },
+    {
+      "Key": "smog",
+      "Value": "Smog"
+    },
+    {
+      "Key": "sludge",
+      "Value": "Schlammbad"
+    },
+    {
+      "Key": "metalClaw",
+      "Value": "Metallklaue"
+    },
+    {
+      "Key": "viceGrip",
+      "Value": "Klammer"
+    },
+    {
+      "Key": "flameWheel",
+      "Value": "Flammenrad"
+    },
+    {
+      "Key": "megahorn",
+      "Value": "Vielender"
+    },
+    {
+      "Key": "wingAttack",
+      "Value": "Flügelschlag"
+    },
+    {
+      "Key": "flamethrower",
+      "Value": "Flammenwurf"
+    },
+    {
+      "Key": "suckerPunch",
+      "Value": "Tiefschlag"
+    },
+    {
+      "Key": "dig",
+      "Value": "Schaufler"
+    },
+    {
+      "Key": "lowKick",
+      "Value": "Fußkick"
+    },
+    {
+      "Key": "crossChop",
+      "Value": "Kreuzhieb"
+    },
+    {
+      "Key": "psychoCut",
+      "Value": "Psychoklinge"
+    },
+    {
+      "Key": "psybeam",
+      "Value": "Psystrahl"
+    },
+    {
+      "Key": "earthquake",
+      "Value": "Erdbeben"
+    },
+    {
+      "Key": "stoneEdge",
+      "Value": "Steinkante"
+    },
+    {
+      "Key": "icePunch",
+      "Value": "Eishieb"
+    },
+    {
+      "Key": "heartStamp",
+      "Value": "Herzstempel"
+    },
+    {
+      "Key": "discharge",
+      "Value": "Ladungsstoß"
+    },
+    {
+      "Key": "flashCannon",
+      "Value": "Blitzkanone"
+    },
+    {
+      "Key": "peck",
+      "Value": "Schnabel"
+    },
+    {
+      "Key": "drillPeck",
+      "Value": "Bohrschnabel"
+    },
+    {
+      "Key": "iceBeam",
+      "Value": "Eisstrahl"
+    },
+    {
+      "Key": "blizzard",
+      "Value": "Blizzard"
+    },
+    {
+      "Key": "airSlash",
+      "Value": "Luftschnitt"
+    },
+    {
+      "Key": "heatWave",
+      "Value": "Hitzewelle"
+    },
+    {
+      "Key": "twineedle",
+      "Value": "Duonadel"
+    },
+    {
+      "Key": "poisonJab",
+      "Value": "Gifthieb"
+    },
+    {
+      "Key": "aerialAce",
+      "Value": "Aero-Ass"
+    },
+    {
+      "Key": "drillRun",
+      "Value": "Schlagbohrer"
+    },
+    {
+      "Key": "petalBlizzard",
+      "Value": "Blütenwirbel"
+    },
+    {
+      "Key": "megaDrain",
+      "Value": "Megasauger"
+    },
+    {
+      "Key": "bugBuzz",
+      "Value": "Käfergebrumm"
+    },
+    {
+      "Key": "poisonFang",
+      "Value": "Giftzahn"
+    },
+    {
+      "Key": "nightSlash",
+      "Value": "Nachthieb"
+    },
+    {
+      "Key": "slash",
+      "Value": "Schlitzer"
+    },
+    {
+      "Key": "bubbleBeam",
+      "Value": "Blubbstrahl"
+    },
+    {
+      "Key": "submission",
+      "Value": "Überroller"
+    },
+    {
+      "Key": "karateChop",
+      "Value": "Karateschlag"
+    },
+    {
+      "Key": "lowSweep",
+      "Value": "Fußtritt"
+    },
+    {
+      "Key": "aquaJet",
+      "Value": "Wasserdüse"
+    },
+    {
+      "Key": "aquaTail",
+      "Value": "Nassschweif"
+    },
+    {
+      "Key": "seedBomb",
+      "Value": "Samenbomben"
+    },
+    {
+      "Key": "psyshock",
+      "Value": "Psychoschock"
+    },
+    {
+      "Key": "rockThrow",
+      "Value": "Steinwurf"
+    },
+    {
+      "Key": "ancientPower",
+      "Value": "Antik-Kraft"
+    },
+    {
+      "Key": "rockTomb",
+      "Value": "Felsgrab"
+    },
+    {
+      "Key": "rockSlide",
+      "Value": "Steinhagel"
+    },
+    {
+      "Key": "powerGem",
+      "Value": "Juwelenkraft"
+    },
+    {
+      "Key": "shadowSneak",
+      "Value": "Schattenstoß"
+    },
+    {
+      "Key": "shadowPunch",
+      "Value": "Finsterfaust"
+    },
+    {
+      "Key": "shadowClaw",
+      "Value": "Dunkelklaue"
+    },
+    {
+      "Key": "ominousWind",
+      "Value": "OminousWind"
+    },
+    {
+      "Key": "shadowBall",
+      "Value": "Unheilböen"
+    },
+    {
+      "Key": "bulletPunch",
+      "Value": "Patronenhieb"
+    },
+    {
+      "Key": "magnetBomb",
+      "Value": "Magnetbombe"
+    },
+    {
+      "Key": "steelWing",
+      "Value": "Stahlflügel"
+    },
+    {
+      "Key": "ironHead",
+      "Value": "Eisenschädel"
+    },
+    {
+      "Key": "parabolicCharge",
+      "Value": "Parabolladung"
+    },
+    {
+      "Key": "spark",
+      "Value": "Funkensprung"
+    },
+    {
+      "Key": "thunderPunch",
+      "Value": "Donnerschlag"
+    },
+    {
+      "Key": "thunder",
+      "Value": "Donner"
+    },
+    {
+      "Key": "thunderbolt",
+      "Value": "Donnerblitz"
+    },
+    {
+      "Key": "twister",
+      "Value": "Windhose"
+    },
+    {
+      "Key": "dragonBreath",
+      "Value": "Feuerodem"
+    },
+    {
+      "Key": "dragonPulse",
+      "Value": "Drachenpuls"
+    },
+    {
+      "Key": "dragonClaw",
+      "Value": "Drachenklaue"
+    },
+    {
+      "Key": "disarmingVoice",
+      "Value": "Säuselstimme"
+    },
+    {
+      "Key": "drainingKiss",
+      "Value": "Diebeskuss"
+    },
+    {
+      "Key": "dazzlingGleam",
+      "Value": "Zauberschein"
+    },
+    {
+      "Key": "moonblast",
+      "Value": "Mondgewalt"
+    },
+    {
+      "Key": "playRough",
+      "Value": "Knuddler"
+    },
+    {
+      "Key": "crossPoison",
+      "Value": "Giftstreich"
+    },
+    {
+      "Key": "sludgeBomb",
+      "Value": "Matschbombe"
+    },
+    {
+      "Key": "sludgeWave",
+      "Value": "Schlammwoge"
+    },
+    {
+      "Key": "gunkShot",
+      "Value": "Mülltreffer"
+    },
+    {
+      "Key": "mudShot",
+      "Value": "Lehmschuss"
+    },
+    {
+      "Key": "boneClub",
+      "Value": "Knochenkeule"
+    },
+    {
+      "Key": "bulldoze",
+      "Value": "Dampfwalze"
+    },
+    {
+      "Key": "mudBomb",
+      "Value": "Schlammbombe"
+    },
+    {
+      "Key": "furyCutter",
+      "Value": "Zornklinge"
+    },
+    {
+      "Key": "bugBite",
+      "Value": "Käferbiss"
+    },
+    {
+      "Key": "signalBeam",
+      "Value": "Ampelleuchte"
+    },
+    {
+      "Key": "xScissor",
+      "Value": "Kreuzschere"
+    },
+    {
+      "Key": "flameCharge",
+      "Value": "Nitroladung"
+    },
+    {
+      "Key": "flameBurst",
+      "Value": "Funkenflug"
+    },
+    {
+      "Key": "fireBlast",
+      "Value": "Feuersturm"
+    },
+    {
+      "Key": "brine",
+      "Value": "Lake"
+    },
+    {
+      "Key": "waterPulse",
+      "Value": "Aquawelle"
+    },
+    {
+      "Key": "scald",
+      "Value": "Siedewasser"
+    },
+    {
+      "Key": "hydroPump",
+      "Value": "Hydropumpe"
+    },
+    {
+      "Key": "psychic",
+      "Value": "Psychokinese"
+    },
+    {
+      "Key": "psystrike",
+      "Value": "Psychostoß"
+    },
+    {
+      "Key": "iceShard",
+      "Value": "Eissplitter"
+    },
+    {
+      "Key": "icyWind",
+      "Value": "Eissturm"
+    },
+    {
+      "Key": "frostBreath",
+      "Value": "Eisesodem"
+    },
+    {
+      "Key": "absorb",
+      "Value": "Absorber"
+    },
+    {
+      "Key": "gigaDrain",
+      "Value": "Gigasauger"
+    },
+    {
+      "Key": "firePunch",
+      "Value": "Feuerschlag"
+    },
+    {
+      "Key": "solarBeam",
+      "Value": "Solarstrahl"
+    },
+    {
+      "Key": "leafBlade",
+      "Value": "Laubklinge"
+    },
+    {
+      "Key": "powerWhip",
+      "Value": "Blattgeißel"
+    },
+    {
+      "Key": "splash",
+      "Value": "Platscher"
+    },
+    {
+      "Key": "acid",
+      "Value": "Säure"
+    },
+    {
+      "Key": "airCutter",
+      "Value": "Windschnitt"
+    },
+    {
+      "Key": "hurricane",
+      "Value": "Orkan"
+    },
+    {
+      "Key": "brickBreak",
+      "Value": "Durchbruch"
+    },
+    {
+      "Key": "cut",
+      "Value": "Zerschneider"
+    },
+    {
+      "Key": "swift",
+      "Value": "Sternschauer"
+    },
+    {
+      "Key": "hornAttack",
+      "Value": "Hornattacke"
+    },
+    {
+      "Key": "stomp",
+      "Value": "Stampfer"
+    },
+    {
+      "Key": "headbutt",
+      "Value": "Kopfnuss"
+    },
+    {
+      "Key": "hyperFang",
+      "Value": "Hyperzahn"
+    },
+    {
+      "Key": "slam",
+      "Value": "Slam"
+    },
+    {
+      "Key": "bodySlam",
+      "Value": "Bodyslam"
+    },
+    {
+      "Key": "rest",
+      "Value": "Erholung"
+    },
+    {
+      "Key": "struggle",
+      "Value": "Verzweifler"
+    },
+    {
+      "Key": "scaldBlastoise",
+      "Value": "Siedewasser"
+    },
+    {
+      "Key": "hydroPumpBlastoise",
+      "Value": "Hydropumpe"
+    },
+    {
+      "Key": "wrapGreen",
+      "Value": "Wickel"
+    },
+    {
+      "Key": "wrapPink",
+      "Value": "Wickel"
+    },
+    {
+      "Key": "furyCutterFast",
+      "Value": "Zornklinge"
+    },
+    {
+      "Key": "bugBiteFast",
+      "Value": "Käferbiss"
+    },
+    {
+      "Key": "biteFast",
+      "Value": "Biss"
+    },
+    {
+      "Key": "suckerPunchFast",
+      "Value": "Tiefschlag"
+    },
+    {
+      "Key": "dragonBreathFast",
+      "Value": "Feuerodem"
+    },
+    {
+      "Key": "thunderShockFast",
+      "Value": "Donnerschock"
+    },
+    {
+      "Key": "sparkFast",
+      "Value": "Funkensprung"
+    },
+    {
+      "Key": "lowKickFast",
+      "Value": "Fußkick"
+    },
+    {
+      "Key": "karateChopFast",
+      "Value": "Karateschlag"
+    },
+    {
+      "Key": "emberFast",
+      "Value": "Glut"
+    },
+    {
+      "Key": "wingAttackFast",
+      "Value": "Flügelschlag"
+    },
+    {
+      "Key": "peckFast",
+      "Value": "Schnabel"
+    },
+    {
+      "Key": "lickFast",
+      "Value": "Schlecker"
+    },
+    {
+      "Key": "shadowClawFast",
+      "Value": "Dunkelklaue"
+    },
+    {
+      "Key": "vineWhipFast",
+      "Value": "Rankenhieb"
+    },
+    {
+      "Key": "razorLeafFast",
+      "Value": "Rasierblatt"
+    },
+    {
+      "Key": "mudShotFast",
+      "Value": "Lehmschuss"
+    },
+    {
+      "Key": "iceShardFast",
+      "Value": "Eissplitter"
+    },
+    {
+      "Key": "frostBreathFast",
+      "Value": "Eisesodem"
+    },
+    {
+      "Key": "quickAttackFast",
+      "Value": "Ruckzuckhieb"
+    },
+    {
+      "Key": "scratchFast",
+      "Value": "Kratzer"
+    },
+    {
+      "Key": "tackleFast",
+      "Value": "Tackle"
+    },
+    {
+      "Key": "poundFast",
+      "Value": "Pfund"
+    },
+    {
+      "Key": "cutFast",
+      "Value": "Zerschneider"
+    },
+    {
+      "Key": "poisonJabFast",
+      "Value": "Gifthieb"
+    },
+    {
+      "Key": "acidFast",
+      "Value": "Säure"
+    },
+    {
+      "Key": "psychoCutFast",
+      "Value": "Psychoklinge"
+    },
+    {
+      "Key": "rockThrowFast",
+      "Value": "Steinwurf"
+    },
+    {
+      "Key": "metalClawFast",
+      "Value": "Metallklaue"
+    },
+    {
+      "Key": "bulletPunchFast",
+      "Value": "Patronenhieb"
+    },
+    {
+      "Key": "waterGunFast",
+      "Value": "Aquaknarre"
+    },
+    {
+      "Key": "splashFast",
+      "Value": "Platscher"
+    },
+    {
+      "Key": "waterGunFastBlastoise",
+      "Value": "Aquaknarre"
+    },
+    {
+      "Key": "mudSlapFast",
+      "Value": "Lehmschelle"
+    },
+    {
+      "Key": "zenHeadbuttFast",
+      "Value": "Zen-Kopfstoß"
+    },
+    {
+      "Key": "confusionFast",
+      "Value": "Konfusion"
+    },
+    {
+      "Key": "poisonStingFast",
+      "Value": "Giftstachel"
+    },
+    {
+      "Key": "bubbleFast",
+      "Value": "Blubber"
+    },
+    {
+      "Key": "feintAttackFast",
+      "Value": "Finte"
+    },
+    {
+      "Key": "steelWingFast",
+      "Value": "Stahlflügel"
+    },
+    {
+      "Key": "fireFangFast",
+      "Value": "Feuerzahn"
+    },
+    {
+      "Key": "rockSmashFast",
+      "Value": "Zertrümmerer"
     }
   ]
 }

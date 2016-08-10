@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Logging;
 using POGOProtos.Inventory.Item;
 using Google.Protobuf.Collections;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -23,13 +24,13 @@ namespace PoGo.NecroBot.Logic.Utils
     public class Statistics
     {
         private readonly DateTime _initSessionDateTime = DateTime.Now;
-
+        
         private StatsExport _exportStats;
         private string _playerName;
         public int TotalExperience;
         public int TotalItemsRemoved;
         public int TotalPokemons;
-        public int TotalPokemonsTransfered;
+        public int TotalPokemonTransferred;
         public int TotalStardust;
         public int LevelForRewards = -1;
 
@@ -86,7 +87,13 @@ namespace PoGo.NecroBot.Logic.Utils
                         }
                     }
                 }
-
+                var Result2 = Execute(inventory).Result;
+                LevelForRewards = stat.Level;
+                if (Result2.ToString().ToLower().Contains("success"))
+                {
+                    string[] tokens = Result2.Result.ToString().Split(new[] { "itemId" }, StringSplitOptions.None);
+                    Logging.Logger.Write("Items Awarded:" + Result2.ItemsAwarded.ToString());
+                }
                 output = new StatsExport
                 {
                     Level = stat.Level,
@@ -97,6 +104,12 @@ namespace PoGo.NecroBot.Logic.Utils
                 };
             }
             return output;
+        }
+
+        public async Task<LevelUpRewardsResponse> Execute(ISession ctx)
+        {
+            var Result = await ctx.Inventory.GetLevelUpRewards(LevelForRewards);
+            return Result;
         }
 
         public async Task<LevelUpRewardsResponse> Execute( Inventory inventory )
@@ -114,9 +127,10 @@ namespace PoGo.NecroBot.Logic.Utils
         {
             var xpStats = string.Format(xpTemplate, _exportStats.Level, _exportStats.HoursUntilLvl,
                 _exportStats.MinutesUntilLevel, _exportStats.CurrentXp, _exportStats.LevelupXp);
+
             return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience/GetRuntime(),
                 TotalPokemons/GetRuntime(),
-                TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
+                TotalStardust, TotalPokemonTransferred, TotalItemsRemoved);
         }
 
         public static int GetXpDiff(int level)

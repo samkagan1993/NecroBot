@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -23,14 +24,16 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonDatas = pokemons as IList<PokemonData> ?? pokemons.ToList();
             var pokemonsFiltered =
                 pokemonDatas.Where(pokemon => !session.LogicSettings.PokemonsNotToTransfer.Contains(pokemon.PokemonId))
-                    .ToList();
+                    .ToList().OrderBy( poke => poke.Cp );
 
             if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 pokemonsFiltered =
                     pokemonDatas.Where(pokemon => !session.LogicSettings.PokemonsToEvolve.Contains(pokemon.PokemonId))
-                        .ToList();
+                        .ToList().OrderBy( poke => poke.Cp );
 
-            foreach (var pokemon in pokemonsFiltered)
+            var orderedPokemon = pokemonsFiltered.OrderBy( poke => poke.Cp );
+
+            foreach (var pokemon in orderedPokemon )
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if ((pokemon.Cp >= session.LogicSettings.KeepMinCp) ||
@@ -61,6 +64,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
                     FamilyCandies = family.Candy_
                 });
+
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
             }
         }
     }

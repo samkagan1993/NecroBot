@@ -19,7 +19,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
+            if (!session.LogicSettings.CatchPokemon) return;
+            
             Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
             var incensePokemon = await session.Client.Map.GetIncensePokemons();
@@ -45,14 +46,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                         session.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                    await Task.Delay(distance > 100 ? 3000 : 500, cancellationToken);
+                    await Task.Delay(distance > 100 ? 500 : 100, cancellationToken);
 
                     var encounter =
                         await
-                            session.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId,
+                            session.Client.Encounter.EncounterIncensePokemon((ulong) pokemon.EncounterId,
                                 pokemon.SpawnPointId);
 
-                    if (encounter.Result == IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess)
+                    if (encounter.Result == IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess && session.LogicSettings.CatchPokemon)
                     {
                         await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
                     }
@@ -64,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 Message = session.Translation.GetTranslation(TranslationString.InvFullTransferring)
                             });
-                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                            await  TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                         }
                         else
                             session.EventDispatcher.Send(new WarnEvent

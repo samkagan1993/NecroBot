@@ -1,17 +1,32 @@
+<p align="center">
+  <a href="http://necrobot.io">
+    <img alt="Logo" src="http://necrobot.io/img/typotype-transparent.png" width="600">
+  </a>
+</p>
+
 [![Discord](https://img.shields.io/badge/discord-NECROBOT.IO-blue.svg)](https://discord.gg/VXKxNFr)
 [![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
 [![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
-[![Stories in Progress](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=waffle%3Ain%20progress&title=In%20Progress)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![Github All Releases](https://img.shields.io/github/downloads/NECROBOTIO/NecroBot/total.svg)](https://github.com/NECROBOTIO/NecroBot/releases)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
-
-<!-- title -->
-<h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
-Official Website  http://necrobot.io
+[![Twitter Follow](https://img.shields.io/twitter/follow/NECROBOTIO.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NECROBOTIO)
 
 Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
-<strong><em>UPDATE (8/4/2016)</em></strong> - Any program utilizing PoGO's API will not function. <strong>Read more [here](https://www.reddit.com/r/pokemongodev/comments/4w1cvr/pokemongo_current_api_status/)</strong>
+## NECROBOT - by the community, for the community.
+
+<h2><a name="getting-started">Getting Started</a></h2>
+Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
+<br/>
+
+<h2><a name="donating">Donating</a></h2>
+<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=NecroBot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
+
+<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
+
+<h6><em>[A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server costs will be covered using the Donations.]</em></h6><br/>
 
 <h2><a name="features">Features</a></h2>
 
@@ -34,23 +49,18 @@ Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
  - [Multi bot support]
  - [Snipe pokemon]
  - [Power-Up pokemon]
-
-<h2><a name="getting-started">Getting Started</a></h2>
-Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
-<br/>
-
-<h2><a name="donating">Donating</a></h2>
-<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=POGO%20Bot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
-
-<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
-
-<h6><em>[ A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server and License costs will be covered using the Donations. ]</em></h6><br/>
-
-<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
+ - [Telegram Remote Control Support]
 
 <h2><a name="credits">Credits</a></h2>
-A big thank you goes to Feroxs' hard work on the API & Console. Without him, this would not have been possible. <3
+
+FeroxRev - [RocketAPI](https://github.com/FeroxRev/Pokemon-Go-Rocket-API)
+
+LineWalker - [POGOProtos-0.31.0](https://github.com/Linewalker/POGOProtos-0.31.0)
+
+Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pull/378/files)
+
+AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
+
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
 
@@ -59,6 +69,6 @@ Thanks to everyone who volunteered by contributing via Pull Requests!
 This Website and Project is in no way affiliated with, authorized, maintained, sponsored or endorsed by Niantic, The Pokémon Company, Nintendo or any of its affiliates or subsidiaries. This is an independent and unofficial API for educational use ONLY. 
 Using the Project might be against the TOS
 
-Inquiries: necronomicon@necrobot.io
+Inquiries: contact@necrobot.io
 
 <hr/>

@@ -33,6 +33,10 @@ namespace PoGo.NecroBot.CLI.Models
 
         internal static string Update;
 
+        internal static string New;
+
+        internal static string SoftBan;
+
         internal static void SetStrings(ISession session)
         {
             Attention =
@@ -85,11 +89,19 @@ namespace PoGo.NecroBot.CLI.Models
 
             Transferred =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryTransfered) ?? "TRANSFERED";
+                    TranslationString.LogEntryTransfered) ?? "TRANSFERRED";
 
             Update =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryUpdate) ?? "UPDATE";
+                    TranslationString.LogEntryUpdate ) ?? "UPDATE";
+
+            New =
+                session?.Translation.GetTranslation(
+                    TranslationString.LogEntryNew ) ?? "NEW";
+
+            SoftBan =
+                session?.Translation.GetTranslation(
+                   TranslationString.LogEntrySoftBan) ?? "SOFTBAN";
         }
     }
 }
